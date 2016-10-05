@@ -10,10 +10,21 @@ var prefilledToDoItems = [
     {id: 3, itemText: "I am the third item", isCompleted: false},
 ];
 
+var idIncrementer = 4;
+
 
 var ToDoContainer = React.createClass({
+    getInitialState: function() {
+        return {
+            ToDoItemArray: prefilledToDoItems
+        }
+    },
     updateToDoList: function(newItemText) {
-        console.log("I am in update to do list in the ToDOContainer!", newItemText);
+        var newToDoItem = {id: idIncrementer++, itemText: newItemText, isCompleted: false};
+        var listArray = this.state.ToDoItemArray;
+
+        listArray.push(newToDoItem);
+        this.setState({ToDoItemArray: listArray});
     },
     render: function() {
        return (
