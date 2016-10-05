@@ -7,5 +7,4 @@ var ToDoListItems = React.createClass({
     }
 });
 
-
 module.exports = ToDoListItems;
