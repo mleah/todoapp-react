@@ -29,4 +29,8 @@ var ToDoInput = React.createClass({
     }
 });
 
+ToDoInput.propTypes = {
+    onFormSubmit: React.PropTypes.func.isRequired
+}
+
 module.exports = ToDoInput;

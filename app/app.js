@@ -32,7 +32,7 @@ var ToDoContainer = React.createClass({
                I am in the to do container!!!
                <ToDoInput onFormSubmit={this.updateToDoList}/>
 
-               <ToDoList />
+               <ToDoList listItemArray={this.state.ToDoItemArray}/>
 
            </div>
        )
