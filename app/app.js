@@ -23,8 +23,10 @@ var ToDoContainer = React.createClass({
         var newToDoItem = {id: idIncrementer++, itemText: newItemText, isCompleted: false};
         var listArray = this.state.ToDoItemArray;
 
-        listArray.push(newToDoItem);
-        this.setState({ToDoItemArray: listArray});
+        if(!isDuplicateItem(listArray, newToDoItem)) {
+            listArray.push(newToDoItem);
+            this.setState({ToDoItemArray: listArray});
+        }
     },
     render: function() {
        return (
@@ -37,6 +39,14 @@ var ToDoContainer = React.createClass({
        )
    }
 });
+
+
+function isDuplicateItem(arrayToCheck, objectToCheck) {
+    console.log(objectToCheck.itemText, " + ", arrItem.itemText);
+    arrayToCheck.some(function(arrItem) {
+        return objectToCheck.itemText == arrItem.itemText;
+    });
+}
 
 
 ReactDOM.render(
