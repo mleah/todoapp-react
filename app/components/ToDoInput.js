@@ -23,7 +23,7 @@ var ToDoInput = React.createClass({
         return (
             <form onSubmit={this.handleSubmit}>
                 <input type='text' ref='item' onChange={this.handleChange} value={this.state.inputText}/>
-                <input type='submit' value='Add' />
+                <input type='submit' value='Add Item' />
             </form>
         );
     }

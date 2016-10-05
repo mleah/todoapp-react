@@ -29,7 +29,6 @@ var ToDoContainer = React.createClass({
     render: function() {
        return (
            <div className="toDoContainer">
-               I am in the to do container!!!
                <ToDoInput onFormSubmit={this.updateToDoList}/>
 
                <ToDoList listItemArray={this.state.ToDoItemArray}/>
