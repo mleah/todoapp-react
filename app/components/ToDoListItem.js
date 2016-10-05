@@ -1,11 +1,11 @@
 var React = require('react');
 
 
-var ToDoListItem = React.createClass({
+var ToDoListItems = React.createClass({
     render: function() {
-        return <div>ToDoListItem</div>
+        return <li>ToDoListItem</li>
     }
 });
 
 
-module.exports = ToDoListItem;
+module.exports = ToDoListItems;
