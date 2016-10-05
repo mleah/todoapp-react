@@ -3,7 +3,15 @@ var ReactDOM = require('react-dom');
 
 var ToDoContainer = React.createClass({
    render: function() {
-       return <div>Container</div>
+       return (
+           <div className="toDoContainer">
+               I am in the to do container!!!
+               <ToDoInput />
+
+               <ToDoList />
+
+           </div>
+       )
    }
 });
 
@@ -26,7 +34,11 @@ var ToDoInput = React.createClass({
 
 var ToDoList = React.createClass({
    render: function() {
-       return <div>ToDoList</div>
+       return (
+           <div>To Do List!!
+                <ToDoListItem />
+           </div>
+       )
    }
 });
 
@@ -39,5 +51,5 @@ var ToDoListItem = React.createClass({
 
 
 ReactDOM.render(
-    <ToDoInput/>,
+    <ToDoContainer/>,
 document.getElementById('app'));
