@@ -12,11 +12,14 @@ var prefilledToDoItems = [
 
 
 var ToDoContainer = React.createClass({
+    updateToDoList: function(newItemText) {
+        console.log("I am in update to do list in the ToDOContainer!", newItemText);
+    },
     render: function() {
        return (
            <div className="toDoContainer">
                I am in the to do container!!!
-               <ToDoInput />
+               <ToDoInput onFormSubmit={this.updateToDoList}/>
 
                <ToDoList />
 
