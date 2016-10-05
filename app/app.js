@@ -1,9 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var ToDoContainer = React.createClass({
+   render: function() {
+       return <div>Container</div>
+   }
+});
 
-
-var ToDoForm = React.createClass({
+var ToDoInput = React.createClass({
     getInitialState: function() {
         return {listItem: ''}
     },
@@ -20,6 +24,20 @@ var ToDoForm = React.createClass({
     }
 });
 
+var ToDoList = React.createClass({
+   render: function() {
+       return <div>ToDoList</div>
+   }
+});
+
+
+var ToDoListItem = React.createClass({
+    render: function() {
+        return <div>ToDoListItem</div>
+    }
+});
+
+
 ReactDOM.render(
-    <ToDoForm/>,
+    <ToDoInput/>,
 document.getElementById('app'));
