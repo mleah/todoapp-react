@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from '../actions/actions.js'
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, SET_MARIAH_FILTER, MariahFilters, VisibilityFilters } from '../actions/actions.js'
 const { SHOW_ALL } = VisibilityFilters
 
 function visibilityFilter(state = SHOW_ALL, action) {
@@ -35,8 +35,14 @@ function todos(state = [], action) {
     }
 }
 
-function mariahFilter(state = "COOL") {
-    return state;
+function mariahFilter(state = "", action) {
+    console.log(action);
+    console.log(state);
+    if (action){
+        return action.text
+    } else {
+        return state
+    }
 }
 
 const todoApp = combineReducers({
