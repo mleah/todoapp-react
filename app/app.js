@@ -1,7 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var ToDoInput = require('./components/ToDoInput.js')
+var ToDoInput = require('./components/ToDoInput.js');
 var ToDoList = require('./components/ToDoList.js');
+
 
 
 var prefilledToDoItems = [
