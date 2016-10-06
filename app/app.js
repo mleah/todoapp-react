@@ -42,8 +42,7 @@ var ToDoContainer = React.createClass({
 
 
 function isDuplicateItem(arrayToCheck, objectToCheck) {
-    console.log(objectToCheck.itemText, " + ", arrItem.itemText);
-    arrayToCheck.some(function(arrItem) {
+    return arrayToCheck.some(function(arrItem) {
         return objectToCheck.itemText == arrItem.itemText;
     });
 }
