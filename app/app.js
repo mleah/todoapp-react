@@ -8,8 +8,6 @@ var ToDoList = require('./components/ToDoList.js');
 
 
 
-
-
 var prefilledToDoItems = [
     {id: 1, itemText: "I am the first item", isCompleted: false},
     {id: 2, itemText: "I am the second item", isCompleted: false},
