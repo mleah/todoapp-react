@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, SET_MARIAH_FILTER, MariahFilters, VisibilityFilters } from '../actions/actions.js'
+import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, SET_MARIAH_FILTER, VisibilityFilters } from '../actions/actions.js'
 const { SHOW_ALL } = VisibilityFilters
 
 function visibilityFilter(state = SHOW_ALL, action) {
@@ -11,7 +11,7 @@ function visibilityFilter(state = SHOW_ALL, action) {
     }
 }
 
-function todos(state = [], action) {
+function todos(state = [{text: "Learn React", completed: false}, {text: "Learn Redux", completed: true}], action) {
     switch (action.type) {
         case ADD_TODO:
             return [
@@ -35,11 +35,10 @@ function todos(state = [], action) {
     }
 }
 
+
 function mariahFilter(state = "", action) {
-    console.log(action);
-    console.log(state);
-    if (action){
-        return action.text
+    if (action.string){
+        return action.string
     } else {
         return state
     }

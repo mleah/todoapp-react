@@ -18,10 +18,6 @@ export const VisibilityFilters = {
     SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
-export const MariahFilters = {
-    COOL: "COOL",
-    REALLY_COOL: "REALLY_COOL"
-}
 
 /*
  * action creators
@@ -39,6 +35,6 @@ export function setVisibilityFilter(filter) {
     return { type: SET_VISIBILITY_FILTER, filter }
 }
 
-export function setMariahFilter(text) {
-    return { type: SET_MARIAH_FILTER, text }
+export function setMariahFilter(string) {
+    return { type: SET_MARIAH_FILTER, string }
 }
