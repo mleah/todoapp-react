@@ -1,0 +1,18 @@
+
+.appContainer {
+    font-family: Arial;
+    font-size: 24px;
+}
+
+
+.addButton {
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 24px;
+}
+
+.todoInput {
+    background-color: aliceblue;
+    font-size: 24px;
+    margin-right: 5px;
+}

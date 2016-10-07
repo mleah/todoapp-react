@@ -1,17 +1,14 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, SET_MARIAH_FILTER, VisibilityFilters } from '../actions/actions.js'
-const { SHOW_ALL } = VisibilityFilters
+import { ADD_TODO, TOGGLE_TODO } from '../actions/actions.js'
 
-function visibilityFilter(state = SHOW_ALL, action) {
-    switch (action.type) {
-        case SET_VISIBILITY_FILTER:
-            return action.filter
-        default:
-            return state
-    }
-}
+const initialTodos = [
+    {text: "Learn React", completed: false},
+    {text: "Learn Redux", completed: true},
+    {text: "Learn ES6" , completed: false},
+    {text: "Learn typescript", completed: false}
+    ];
 
-function todos(state = [{text: "Learn React", completed: false}, {text: "Learn Redux", completed: true}], action) {
+function todos(state = initialTodos, action) {
     switch (action.type) {
         case ADD_TODO:
             return [
@@ -36,18 +33,8 @@ function todos(state = [{text: "Learn React", completed: false}, {text: "Learn R
 }
 
 
-function mariahFilter(state = "", action) {
-    if (action.string){
-        return action.string
-    } else {
-        return state
-    }
-}
-
 const todoApp = combineReducers({
-    visibilityFilter,
-    todos,
-    mariahFilter
+    todos
 })
 
 export default todoApp

@@ -17,12 +17,12 @@ class AddItemForm extends React.Component {
             input.value = '';
         }
         return (
-            <div>
+            <div className="formContainer">
                 <form onSubmit={handleSubmit}>
-                    <input ref={node => {
+                    <input className="todoInput" ref={node => {
                         input = node
                     }} />
-                    <button type="submit">
+                    <button className="addButton" type="submit">
                         Add Todo
                     </button>
                 </form>

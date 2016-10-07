@@ -4,7 +4,7 @@ const TodoItem = ({ onClick, completed, text }) => {
 
     const customStyling = {textDecoration: completed ? 'line-through' : 'none'};
 
-    return <div onClick={onClick} style={customStyling}> {text} </div>
+    return <div className="todoItem" onClick={onClick} style={customStyling}> {text} </div>
 }
 
 TodoItem.propTypes = {

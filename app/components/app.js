@@ -3,7 +3,7 @@ import ToDoListContainer from './todoListContainer.js'
 import AddItemForm from './addItemForm.js'
 
 const App = () => (
-    <div>
+    <div className="appContainer">
         <AddItemForm />
         <ToDoListContainer />
     </div>

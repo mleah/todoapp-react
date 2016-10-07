@@ -11,7 +11,7 @@ class TodoList extends React.Component {
         );
 
         return (
-            <div>
+            <div className="todoListContainer">
                 {todoElement}
             </div>
         );
