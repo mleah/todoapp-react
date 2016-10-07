@@ -1,12 +1,11 @@
 import React from 'react'
-import List from './list.js'
+import ToDoListContainer from './todoListContainer.js'
 
 const App = () => (
     <div>
-        <List />
+        <ToDoListContainer />
     </div>
 )
-
 
 
 export default App
