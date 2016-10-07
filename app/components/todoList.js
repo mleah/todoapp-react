@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Todo from './ToDoItem.js'
+import TodoItem from './ToDoItem.js'
 
 class TodoList extends React.Component {
     constructor(props) {
@@ -7,10 +7,7 @@ class TodoList extends React.Component {
     }
     render() {
         const todoElement = this.props.list.map((todo, index) =>
-            <div
-                key={index}
-                onClick={() => this.props.onTodoClick(index)}
-            >{todo.text}</div>
+            <TodoItem key={index} {...todo} onClick={() => this.props.onTodoClick(index)} />
         );
 
         return (
