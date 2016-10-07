@@ -1,14 +1,23 @@
 import React, { PropTypes } from 'react'
 
-const TodoItem = ({ onClick, completed, text }) => {
+const TodoItem = ({ onTodoClick, onDeleteClick, completed, text }) => {
 
-    const customStyling = {textDecoration: completed ? 'line-through' : 'none'};
+    const customStyling = {background: completed ? 'lightgrey' : 'none', color: completed ? 'darkgrey' : 'inherit'};
 
-    return <div className="todoItem" onClick={onClick} style={customStyling}> {text} </div>
+    return (
+        <div className="todoItem">
+            <span className="todoItemClick" onClick={onTodoClick} style={customStyling}>
+                <input className="completedCheckbox" type="checkbox" checked={completed}/>
+                <span className="todoText">{text}</span>
+            </span>
+            <button className="deleteTodoButton" onClick={onDeleteClick}>Delete</button>
+        </div>
+    )
 }
 
 TodoItem.propTypes = {
-    onClick: PropTypes.func.isRequired,
+    onTodoClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired,
     completed: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired
 }

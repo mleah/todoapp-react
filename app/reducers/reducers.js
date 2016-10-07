@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, TOGGLE_TODO } from '../actions/actions.js'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/actions.js'
 
 const initialTodos = [
     {text: "Learn React", completed: false},
@@ -27,6 +27,10 @@ function todos(state = initialTodos, action) {
                 }
                 return todo
             })
+        case DELETE_TODO:
+            console.log("IN DELETE TODO!!");
+            console.log(action.index);
+            return state
         default:
             return state
     }

@@ -1,11 +1,9 @@
-
 .appContainer {
     font-family: Arial;
     font-size: 24px;
 }
 
-
-.addButton {
+.addTodoButton {
     background-color: cornflowerblue;
     color: white;
     font-size: 24px;
@@ -15,4 +13,35 @@
     background-color: aliceblue;
     font-size: 24px;
     margin-right: 5px;
+}
+
+.todoItem {
+    width: 300px;
+    margin-top: 10px
+}
+
+.todoItemClick {
+    width: 240px;
+    display: inline-block;
+}
+
+.deleteTodoButton {
+    font-size: 14px;
+    float: right;
+    color: white;
+    vertical-align: middle;
+    background-color: indianred;
+    height: 28px;
+}
+
+.todoText{
+    width: 235px;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.completedCheckbox {
+    margin-right:5px;
+    height: 16px;
+    width: 16px;
 }

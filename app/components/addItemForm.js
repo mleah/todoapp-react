@@ -22,7 +22,7 @@ class AddItemForm extends React.Component {
                     <input className="todoInput" ref={node => {
                         input = node
                     }} />
-                    <button className="addButton" type="submit">
+                    <button className="addTodoButton" type="submit">
                         Add Todo
                     </button>
                 </form>

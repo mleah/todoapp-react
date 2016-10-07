@@ -7,7 +7,10 @@ class TodoList extends React.Component {
     }
     render() {
         const todoElement = this.props.list.map((todo, index) =>
-            <TodoItem key={index} {...todo} onClick={() => this.props.onTodoClick(index)} />
+            <TodoItem key={index} {...todo}
+                      onTodoClick={() => this.props.onTodoClick(index)}
+                      onDeleteClick={() => this.props.onDeleteClick(index)}
+            />
         );
 
         return (
@@ -20,7 +23,8 @@ class TodoList extends React.Component {
 
 TodoList.propTypes = {
     list: PropTypes.array.isRequired,
-    onTodoClick: PropTypes.func.isRequired
+    onTodoClick: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 }
 
 export default TodoList
