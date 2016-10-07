@@ -28,9 +28,11 @@ function todos(state = initialTodos, action) {
                 return todo
             })
         case DELETE_TODO:
-            console.log("IN DELETE TODO!!");
-            console.log(action.index);
-            return state
+
+            return state.filter(function(todo, index){
+                return index !== action.index
+            });
+
         default:
             return state
     }
