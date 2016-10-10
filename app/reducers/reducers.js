@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/actions.js'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST } from '../actions/actions.js'
 
 const initialTodos = [
     {text: "Learn React", completed: false, dueDate: ""},
@@ -31,6 +31,12 @@ function todos(state = initialTodos, action) {
         case DELETE_TODO:
 
             return state.filter((item, index) => index !== action.index);
+
+
+        case SORT_TODO_LIST:
+
+            //not doing anything yet...
+            return state;
 
         default:
             return state

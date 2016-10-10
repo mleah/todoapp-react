@@ -17,7 +17,7 @@ class AddItemForm extends React.Component {
             }
             this.props.dispatch(addTodo(nameInput.value, dateInput.value));
             nameInput.value = '';
-            dateInput.value = ''
+            dateInput.value = '';
         };
 
         return (
