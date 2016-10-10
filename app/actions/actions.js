@@ -10,8 +10,8 @@ export const DELETE_TODO = 'DELETE_TODO';
  * action creators
  */
 
-export function addTodo(text) {
-    return { type: ADD_TODO, text }
+export function addTodo(text, dueDate) {
+    return { type: ADD_TODO, text, dueDate }
 }
 
 export function toggleTodo(index) {

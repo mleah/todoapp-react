@@ -7,23 +7,28 @@ class AddItemForm extends React.Component {
         super(props);
     }
     render() {
-        let input;
+        let nameInput;
+        let dateInput;
 
         const handleSubmit = event => {
             event.preventDefault();
-            if (!input.value.trim()) {
+            if (!nameInput.value.trim()) {
                 return;
             }
-            this.props.dispatch(addTodo(input.value));
-            input.value = '';
+            this.props.dispatch(addTodo(nameInput.value, dateInput.value));
+            nameInput.value = '';
+            dateInput.value = ''
         };
 
         return (
             <div className="formContainer">
                 <form onSubmit={handleSubmit}>
                     <input className="todoInput" ref={node => {
-                        input = node
-                    }} />
+                        nameInput = node
+                    }} required/>
+                    <input type="date" ref={node => {
+                        dateInput = node
+                    }}/>
                     <button className="addTodoButton" type="submit">
                         Add To Do
                     </button>

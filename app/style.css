@@ -16,12 +16,12 @@
 }
 
 .todoItem {
-    width: 300px;
+    width: 400px;
     margin-top: 10px
 }
 
 .todoItemClick {
-    width: 240px;
+    width: 340px;
     display: inline-block;
 }
 
@@ -36,6 +36,7 @@
 
 .todoText{
     width: 235px;
+    margin-right: 10px;
     -ms-text-overflow: ellipsis;
     text-overflow: ellipsis;
 }

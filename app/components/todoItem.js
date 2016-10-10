@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const TodoItem = ({ onTodoClick, onDeleteClick, completed, text }) => {
+const TodoItem = ({ onTodoClick, onDeleteClick, completed, text, dueDate }) => {
 
     const customStyling = {background: completed ? 'lightgrey' : 'none', color: completed ? 'darkgrey' : 'inherit'};
 
@@ -9,6 +9,7 @@ const TodoItem = ({ onTodoClick, onDeleteClick, completed, text }) => {
             <span className="todoItemClick" onClick={onTodoClick} style={customStyling}>
                 <input className="completedCheckbox" type="checkbox" checked={completed}/>
                 <span className="todoText">{text}</span>
+                <span>{dueDate}</span>
             </span>
             <button className="deleteTodoButton" onClick={onDeleteClick}>Delete</button>
         </div>

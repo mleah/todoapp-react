@@ -2,10 +2,10 @@ import { combineReducers } from 'redux'
 import { ADD_TODO, TOGGLE_TODO, DELETE_TODO } from '../actions/actions.js'
 
 const initialTodos = [
-    {text: "Learn React", completed: false},
-    {text: "Learn Redux", completed: true},
-    {text: "Learn ES6" , completed: false},
-    {text: "Learn typescript", completed: false}
+    {text: "Learn React", completed: false, dueDate: ""},
+    {text: "Learn Redux", completed: true, dueDate: "2016-12-12"},
+    {text: "Learn ES6" , completed: false, dueDate: "2016-01-01"},
+    {text: "Learn typescript", completed: false, dueDate: "2016-12-01"}
     ];
 
 function todos(state = initialTodos, action) {
@@ -15,7 +15,8 @@ function todos(state = initialTodos, action) {
                 ...state,
                 {
                     text: action.text,
-                    completed: false
+                    completed: false,
+                    dueDate: action.dueDate
                 }
             ];
         case TOGGLE_TODO:
