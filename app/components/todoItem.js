@@ -13,13 +13,13 @@ const TodoItem = ({ onTodoClick, onDeleteClick, completed, text }) => {
             <button className="deleteTodoButton" onClick={onDeleteClick}>Delete</button>
         </div>
     )
-}
+};
 
 TodoItem.propTypes = {
     onTodoClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired,
     completed: PropTypes.bool.isRequired,
     text: PropTypes.string.isRequired
-}
+};
 
 export default TodoItem

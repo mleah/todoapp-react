@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
     return {
         list:  state.todos
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -18,11 +18,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(deleteTodo(id))
         }
     }
-}
+};
 
 const ToDoListContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoList)
+)(TodoList);
 
 export default ToDoListContainer

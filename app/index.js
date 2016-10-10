@@ -6,13 +6,13 @@ import todoApp from './reducers/reducers.js'
 import App from './components/app.js'
 
 
-let store = createStore(todoApp)
+let store = createStore(todoApp);
 
 render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root')
-)
+);
 
 

@@ -7,7 +7,7 @@ const App = () => (
         <AddItemForm />
         <ToDoListContainer />
     </div>
-)
+);
 
 
 export default App

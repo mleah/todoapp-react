@@ -25,6 +25,6 @@ TodoList.propTypes = {
     list: PropTypes.array.isRequired,
     onTodoClick: PropTypes.func.isRequired,
     onDeleteClick: PropTypes.func.isRequired
-}
+};
 
 export default TodoList

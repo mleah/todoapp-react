@@ -7,7 +7,8 @@ class AddItemForm extends React.Component {
         super(props);
     }
     render() {
-        let input
+        let input;
+
         const handleSubmit = event => {
             event.preventDefault();
             if (!input.value.trim()) {
@@ -15,7 +16,8 @@ class AddItemForm extends React.Component {
             }
             this.props.dispatch(addTodo(input.value));
             input.value = '';
-        }
+        };
+
         return (
             <div className="formContainer">
                 <form onSubmit={handleSubmit}>
@@ -23,7 +25,7 @@ class AddItemForm extends React.Component {
                         input = node
                     }} />
                     <button className="addTodoButton" type="submit">
-                        Add Todo
+                        Add To Do
                     </button>
                 </form>
             </div>

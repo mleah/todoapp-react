@@ -17,7 +17,7 @@ function todos(state = initialTodos, action) {
                     text: action.text,
                     completed: false
                 }
-            ]
+            ];
         case TOGGLE_TODO:
             return state.map((todo, index) => {
                 if (index === action.index) {
@@ -26,12 +26,10 @@ function todos(state = initialTodos, action) {
                     })
                 }
                 return todo
-            })
+            });
         case DELETE_TODO:
 
-            return state.filter(function(todo, index){
-                return index !== action.index
-            });
+            return state.filter((item, index) => index !== action.index);
 
         default:
             return state
@@ -41,6 +39,6 @@ function todos(state = initialTodos, action) {
 
 const todoApp = combineReducers({
     todos
-})
+});
 
 export default todoApp
