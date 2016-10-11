@@ -1,6 +1,5 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { addTodo } from '../actions/actions.js'
+import React, { PropTypes } from 'react'
+
 
 class AddItemForm extends React.Component {
     constructor(props) {
@@ -15,7 +14,8 @@ class AddItemForm extends React.Component {
             if (!nameInput.value.trim()) {
                 return;
             }
-            this.props.dispatch(addTodo(nameInput.value, dateInput.value));
+            this.props.onAddTodo(nameInput.value, dateInput.value);
+            this.props.updateSorting(this.props.sortType);
             nameInput.value = '';
             dateInput.value = '';
         };
@@ -38,6 +38,10 @@ class AddItemForm extends React.Component {
     }
 }
 
-AddItemForm = connect()(AddItemForm);
+AddItemForm.propTypes = {
+    sortType: PropTypes.string.isRequired,
+    onAddTodo: PropTypes.func.isRequired,
+    updateSorting: PropTypes.func.isRequired
+};
 
 export default AddItemForm
