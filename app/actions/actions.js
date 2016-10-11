@@ -6,6 +6,20 @@ export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const SORT_TODO_LIST = 'SORT_TODO_LIST';
+export const CURRENT_SORT = 'CURRENT_SORT';
+
+
+
+/*
+ * other constants
+ */
+
+export const SortTypes = {
+    NO_SORT: 'NO_SORT',
+    DUE_DATE_ASC: 'DUE_DATE_ASC',
+    DUE_DATE_DESC: 'DUE_DATE_DESC'
+};
+
 
 /*
  * action creators
@@ -25,5 +39,9 @@ export function deleteTodo(index) {
 
 export function sortTodos(sortType) {
     return { type: SORT_TODO_LIST,  sortType}
+}
+
+export function currentSort(newSort) {
+    return {type: CURRENT_SORT, newSort}
 }
 

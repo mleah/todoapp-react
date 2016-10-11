@@ -8,6 +8,10 @@ import App from './components/app.js'
 
 let store = createStore(todoApp);
 
+let unsubscribe = store.subscribe(() =>
+    console.log(store.getState())
+)
+
 render(
     <Provider store={store}>
         <App />

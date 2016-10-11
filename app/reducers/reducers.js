@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST } from '../actions/actions.js'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST, SortTypes} from '../actions/actions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 
@@ -37,8 +37,8 @@ function todos(state = initialTodos, action) {
 
         case SORT_TODO_LIST:
             const newState = Object.assign([], state);
-            if(action.sortType === "due_date_asc") {
-
+            if(action.sortType === SortTypes.DUE_DATE_ASC) {
+                console.log("INSIDE SORT TODO LIST");
                 let sortedArray = newState.sort(function (firstToDo, secondToDo) {
                     return new Date(secondToDo.dueDate) - new Date(firstToDo.dueDate);
                 });
@@ -54,8 +54,17 @@ function todos(state = initialTodos, action) {
 }
 
 
+function currentSort(state = SortTypes.NO_SORT, action) {
+    if (action.newSort){
+        return action.newSort
+    } else {
+        return state
+    }
+}
+
 const todoApp = combineReducers({
-    todos
+    todos,
+    currentSort
 });
 
 export default todoApp

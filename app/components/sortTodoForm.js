@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { sortTodos } from '../actions/actions.js'
+import { sortTodos, currentSort, SortTypes } from '../actions/actions.js'
 
 class SortTodoForm extends React.Component {
     constructor(props) {
@@ -10,17 +10,18 @@ class SortTodoForm extends React.Component {
         let sortOption;
         const handleChange = event => {
             event.preventDefault();
+            this.props.dispatch(currentSort(sortOption.value));
             this.props.dispatch(sortTodos(sortOption.value));
         };
 
         return (
             <form onChange={handleChange}>
-                <select defaultValue="None" ref={node => {
+                <select defaultValue={SortTypes.NO_SORT} ref={node => {
                     sortOption = node
                 }}>
-                    <option value="None">None</option>
-                    <option value="due_date_asc" >Due Date Asc</option>
-                    <option value="due_date_desc" >Due Date Desc</option>
+                    <option value={SortTypes.NO_SORT}>None</option>
+                    <option value={SortTypes.DUE_DATE_ASC} >Due Date Asc</option>
+                    <option value={SortTypes.DUE_DATE_DESC} >Due Date Desc</option>
                 </select>
             </form>
         )
