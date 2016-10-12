@@ -16,10 +16,10 @@ class SortTodoForm extends React.Component {
 
         return (
             <form onChange={handleChange}>
-                <select defaultValue={SortTypes.NO_SORT} ref={node => {
+                <select defaultValue={SortTypes.DATE_ADDED} ref={node => {
                     sortOption = node
                 }}>
-                    <option value={SortTypes.NO_SORT}>None</option>
+                    <option value={SortTypes.DATE_ADDED}>Date Added</option>
                     <option value={SortTypes.DUE_DATE_ASC} >Due Date Asc</option>
                     <option value={SortTypes.DUE_DATE_DESC} >Due Date Desc</option>
                 </select>

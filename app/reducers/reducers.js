@@ -4,10 +4,10 @@ import {ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST, SortTypes} from '../
 // import moment from 'moment/moment.js';
 
 const initialTodos = [
-    {text: "Learn React", completed: false, dueDate: ""},
-    {text: "Learn Redux", completed: true, dueDate: "2016-12-12"},
-    {text: "Learn ES6", completed: false, dueDate: "2016-01-01"},
-    {text: "Learn typescript", completed: false, dueDate: "2016-12-01"}
+    {id: 1, text: "Learn React", completed: false, dueDate: ""},
+    {id: 2, text: "Learn Redux", completed: true, dueDate: "2016-12-12"},
+    {id: 3, text: "Learn ES6", completed: false, dueDate: "2016-01-01"},
+    {id: 4, text: "Learn typescript", completed: false, dueDate: "2016-12-01"}
 ];
 
 function todos(state = initialTodos, action) {
@@ -16,6 +16,7 @@ function todos(state = initialTodos, action) {
             return [
                 ...state,
                 {
+                    id: Date.now(),
                     text: action.text,
                     completed: false,
                     dueDate: action.dueDate
@@ -39,11 +40,11 @@ function todos(state = initialTodos, action) {
 
             const newState = Object.assign([], state);
 
-            if (action.sortType !== SortTypes.NO_SORT) {
+            if (action.sortType !== SortTypes.DATE_ADDED) {
                 return sortByDate(action.sortType, newState);
             }
 
-            return state;
+            return newState.sort((firstToDo, secondToDo) => firstToDo.id - secondToDo.id);
 
         default:
             return state
@@ -66,7 +67,7 @@ function sortByDate(sortType, newState) {
 }
 
 
-function currentSort(state = SortTypes.NO_SORT, action) {
+function currentSort(state = SortTypes.DATE_ADDED, action) {
     if (action.newSort) {
         return action.newSort
     } else {

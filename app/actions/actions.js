@@ -15,7 +15,7 @@ export const CURRENT_SORT = 'CURRENT_SORT';
  */
 
 export const SortTypes = {
-    NO_SORT: 'NO_SORT',
+    DATE_ADDED: 'DATE_ADDED',
     DUE_DATE_ASC: 'DUE_DATE_ASC',
     DUE_DATE_DESC: 'DUE_DATE_DESC'
 };
