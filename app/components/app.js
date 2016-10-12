@@ -1,15 +1,15 @@
 import React from 'react'
 import ToDoListContainer from './todoListContainer.js'
 import AddItemFormContainer from './addItemFormContainer.js'
-import SortTodoForm from './sortTodoForm.js'
-import Footer from './filter.js'
+import SortTodoForm from './sortTodo.js'
+import FilterTodoForm from './filterToDo.js'
 
 const App = () => (
     <div className="appContainer">
         <AddItemFormContainer />
         <ToDoListContainer />
         <SortTodoForm />
-        <Footer />
+        <FilterTodoForm />
     </div>
 );
 
