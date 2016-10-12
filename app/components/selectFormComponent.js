@@ -31,4 +31,15 @@ class SelectFormComponent extends React.Component {
     }
 }
 
+SelectFormComponent.propTypes = {
+    defaultOption: PropTypes.string.isRequired,
+    optionOne: PropTypes.string.isRequired,
+    optionTwo: PropTypes.string.isRequired,
+    defaultText: PropTypes.string.isRequired,
+    optionOneText: PropTypes.string.isRequired,
+    optionTwoText: PropTypes.string.isRequired,
+    firstOnChangeDispatch: PropTypes.func.isRequired,
+    secondOnChangeDispatch: PropTypes.func
+};
+
 export default SelectFormComponent

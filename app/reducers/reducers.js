@@ -23,8 +23,8 @@ function todos(state = initialTodos, action) {
                 }
             ];
         case TOGGLE_TODO:
-            return state.map((todo, index) => {
-                if (index === action.index) {
+            return state.map((todo) => {
+                if (todo.id === action.id) {
                     return Object.assign({}, todo, {
                         completed: !todo.completed
                     })
@@ -33,7 +33,7 @@ function todos(state = initialTodos, action) {
             });
 
         case DELETE_TODO:
-            return state.filter((item, index) => index !== action.index);
+            return state.filter(todo => todo.id !== action.id);
 
 
         case SORT_TODO_LIST:
