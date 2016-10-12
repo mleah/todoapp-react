@@ -7,7 +7,7 @@ export const TOGGLE_TODO = 'TOGGLE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const SORT_TODO_LIST = 'SORT_TODO_LIST';
 export const CURRENT_SORT = 'CURRENT_SORT';
-
+export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 
 /*
@@ -18,6 +18,13 @@ export const SortTypes = {
     DATE_ADDED: 'DATE_ADDED',
     DUE_DATE_ASC: 'DUE_DATE_ASC',
     DUE_DATE_DESC: 'DUE_DATE_DESC'
+};
+
+
+export const FilterTypes = {
+    SHOW_ALL: 'SHOW_ALL',
+    SHOW_COMPLETED: 'SHOW_COMPLETED',
+    SHOW_ACTIVE: 'SHOW_ACTIVE'
 };
 
 
@@ -43,5 +50,9 @@ export function sortTodos(sortType) {
 
 export function currentSort(newSort) {
     return {type: CURRENT_SORT, newSort}
+}
+
+export function setVisibilityFilter(filterType) {
+    return { type: SET_VISIBILITY_FILTER, filterType }
 }
 

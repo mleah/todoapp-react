@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST, SortTypes} from '../actions/actions.js'
+import {ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST, SortTypes, FilterTypes, SET_VISIBILITY_FILTER} from '../actions/actions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 
@@ -75,9 +75,23 @@ function currentSort(state = SortTypes.DATE_ADDED, action) {
     }
 }
 
+
+function visibilityFilter(state = FilterTypes.SHOW_ALL, action) {
+    switch (action.type) {
+        case SET_VISIBILITY_FILTER:
+
+            return action.filterType;
+
+        default:
+            return state
+    }
+
+}
+
 const todoApp = combineReducers({
     todos,
-    currentSort
+    currentSort,
+    visibilityFilter
 });
 
 export default todoApp

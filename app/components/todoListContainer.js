@@ -3,9 +3,20 @@ import { toggleTodo, deleteTodo } from '../actions/actions.js'
 import TodoList from './todoList.js'
 
 
+const getVisibleTodos = (todos, filter) => {
+    switch (filter) {
+        case 'SHOW_ALL':
+            return todos;
+        case 'SHOW_COMPLETED':
+            return todos.filter(todo => todo.completed);
+        case 'SHOW_ACTIVE':
+            return todos.filter(todo => !todo.completed);
+    }
+};
+
 const mapStateToProps = (state) => {
     return {
-        list:  state.todos
+        list:  getVisibleTodos(state.todos, state.visibilityFilter)
     }
 };
 
