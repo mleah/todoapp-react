@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import TodoItem from './ToDoItem.js'
 
+const {Grid, Row, Col} = require('react-flexbox-grid');
+
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
@@ -14,9 +16,11 @@ class TodoList extends React.Component {
         );
 
         return (
-            <div className="todoListContainer">
-                {todoElement}
-            </div>
+            <Row className="todoListContainer">
+                <ul>
+                    {todoElement}
+                </ul>
+            </Row>
         );
     }
 }

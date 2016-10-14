@@ -8,3 +8,10 @@ button, option, input {
 }
 
 
+ul{
+    list-style-type: none;
+}
+
+.toDoItem{
+
+}

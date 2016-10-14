@@ -4,6 +4,8 @@ import DatePicker from 'material-ui/DatePicker'
 import TextField from 'material-ui/TextField'
 
 
+const {Grid, Row, Col} = require('react-flexbox-grid');
+
 
 class AddItemForm extends React.Component {
     constructor(props) {
@@ -27,7 +29,6 @@ class AddItemForm extends React.Component {
             let newTodo = this.refs.todoInput.getValue();
 
             if (!newTodo.trim()) {
-                console.log(this);
                 this.setState({errorText: "This field is required"});
                 return;
             }
@@ -40,19 +41,19 @@ class AddItemForm extends React.Component {
         };
 
         return (
-            <div className="formContainer">
-                <form onSubmit={handleSubmit} ref="todoInputForm">
+            <Row className="formContainer">
+                <form onSubmit={handleSubmit} ref="todoInputForm" className="addToDoForm">
                     <TextField
-                        hintText="Enter your To Do here!"
+                        floatingLabelText="Enter your To Do here!"
                         errorText={this.state.errorText} className="todoInput" ref="todoInput" onChange={this.handleChange.bind(this)} />
-                    <DatePicker id="date" shouldDisableDate={beforeCurrentDate} ref={node => {
+                    <DatePicker id="date" floatingLabelText="Give your To Do a Date here!" shouldDisableDate={beforeCurrentDate} ref={node => {
                         dateInput = node
                     }}/>
                     <RaisedButton className="addTodoButton" type="submit">
                         Add To Do
                     </RaisedButton>
                 </form>
-            </div>
+            </Row>
         )
     }
 }

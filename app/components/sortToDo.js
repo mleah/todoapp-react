@@ -12,7 +12,8 @@ const mapStateToProps = () => {
         optionTwo: SortTypes.DUE_DATE_DESC,
         defaultText: 'Date Added',
         optionOneText: 'Due Date Ascending',
-        optionTwoText: 'Due Date Descending'
+        optionTwoText: 'Due Date Descending',
+        title: 'Sort by:'
     }
 };
 

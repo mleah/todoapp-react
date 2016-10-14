@@ -11,15 +11,27 @@ import FilterTodoForm from './filterToDo.js'
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+
+const {Grid, Row, Col} = require('react-flexbox-grid');
+
+
 const App = () => (
 
     <MuiThemeProvider>
-        <div className="appContainer">
-            <AddItemFormContainer />
-            <ToDoListContainer />
-            <SortTodoForm />
-            <FilterTodoForm />
-        </div>
+        <Grid>
+            <Row>
+                <Col xs={3}>
+                    <AddItemFormContainer />
+                </Col>
+                <Col xs={3}>
+                    <SortTodoForm />
+                    <FilterTodoForm />
+                </Col>
+            </Row>
+            <Row>
+                <ToDoListContainer />
+            </Row>
+        </Grid>
     </MuiThemeProvider>
 );
 

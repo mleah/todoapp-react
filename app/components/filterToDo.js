@@ -11,7 +11,8 @@ const mapStateToProps = () => {
         optionTwo: FilterTypes.SHOW_ACTIVE,
         defaultText: 'All',
         optionOneText: 'Completed',
-        optionTwoText: 'Active'
+        optionTwoText: 'Active',
+        title: 'Filter by:'
     }
 };
 
