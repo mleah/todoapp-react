@@ -1,5 +1,7 @@
 import {combineReducers} from 'redux'
-import {ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST, SortTypes, FilterTypes, SET_VISIBILITY_FILTER} from '../actions/actions.js'
+import { FilterTypes, SET_VISIBILITY_FILTER} from '../actions/filterActions.js'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST } from '../actions/todoListActions.js'
+import { SortTypes } from '../actions/sortActions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 

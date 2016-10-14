@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addTodo, sortTodos } from '../actions/actions.js'
+import { addTodo, sortTodos } from '../actions/todoListActions.js'
 import AddItemForm from './addItemForm.js'
 
 

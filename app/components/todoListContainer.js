@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { toggleTodo, deleteTodo } from '../actions/actions.js'
+import { toggleTodo, deleteTodo } from '../actions/todoListActions.js'
 import TodoList from './todoList.js'
 
 

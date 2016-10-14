@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SelectFormComponent from './selectFormComponent.js'
-import { setVisibilityFilter, FilterTypes } from '../actions/actions.js'
+import { setVisibilityFilter, FilterTypes } from '../actions/filterActions.js'
 
 
 const mapStateToProps = () => {

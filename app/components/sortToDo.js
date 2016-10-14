@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SelectFormComponent from './selectFormComponent.js'
-import { sortTodos, currentSort, SortTypes } from '../actions/actions.js'
+import { sortTodos } from '../actions/todoListActions.js'
+import { currentSort, SortTypes } from '../actions/sortActions.js'
 
 
 const mapStateToProps = () => {
