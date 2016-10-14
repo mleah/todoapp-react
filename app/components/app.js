@@ -1,6 +1,5 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MyAwesomeReactComponent from './MyAwesomeReactComponent';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import ToDoListContainer from './todoListContainer.js'
 import AddItemFormContainer from './addItemFormContainer.js'
@@ -20,7 +19,6 @@ const App = () => (
             <ToDoListContainer />
             <SortTodoForm />
             <FilterTodoForm />
-            <MyAwesomeReactComponent/>
         </div>
     </MuiThemeProvider>
 );

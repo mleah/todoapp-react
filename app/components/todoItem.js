@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
+import Checkbox from 'material-ui/Checkbox';
 
 const TodoItem = ({ onTodoClick, onDeleteClick, completed, text, dueDate }) => {
 
@@ -7,11 +9,11 @@ const TodoItem = ({ onTodoClick, onDeleteClick, completed, text, dueDate }) => {
     return (
         <div className="todoItem">
             <span className="todoItemClick" onClick={onTodoClick} style={customStyling}>
-                <input className="completedCheckbox" type="checkbox" checked={completed}/>
+                <Checkbox className="completedCheckbox" checked={completed}/>
                 <span className="todoText">{text}</span>
                 <span>{dueDate}</span>
             </span>
-            <button className="deleteTodoButton" onClick={onDeleteClick}>Delete</button>
+            <RaisedButton className="deleteTodoButton" onClick={onDeleteClick}>Delete</RaisedButton>
         </div>
     )
 };

@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
+import DatePicker from 'material-ui/DatePicker'
 
 
 class AddItemForm extends React.Component {
@@ -11,13 +13,16 @@ class AddItemForm extends React.Component {
 
         const handleSubmit = event => {
             event.preventDefault();
+            let newDate = dateInput.refs.input.input.value;
+
             if (!nameInput.value.trim()) {
                 return;
             }
-            this.props.onAddTodo(nameInput.value, dateInput.value);
+
+            this.props.onAddTodo(nameInput.value, newDate);
             this.props.updateSorting(this.props.sortType);
             nameInput.value = '';
-            dateInput.value = '';
+            dateInput.refs.input.input.value = '';
         };
 
         return (
@@ -26,17 +31,23 @@ class AddItemForm extends React.Component {
                     <input className="todoInput" ref={node => {
                         nameInput = node
                     }} required/>
-                    <input type="date" ref={node => {
+                    <DatePicker id="date" shouldDisableDate={beforeCurrentDate} ref={node => {
                         dateInput = node
                     }}/>
-                    <button className="addTodoButton" type="submit">
+                    <RaisedButton className="addTodoButton" type="submit">
                         Add To Do
-                    </button>
+                    </RaisedButton>
                 </form>
             </div>
         )
     }
 }
+
+const beforeCurrentDate = incomingDate => {
+    var date = new Date();
+    let yesterday = date.setDate(date.getDate()-1);
+    return incomingDate <= yesterday;
+};
 
 AddItemForm.propTypes = {
     sortType: PropTypes.string.isRequired,
