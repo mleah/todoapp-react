@@ -1,9 +1,16 @@
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
   entry: './app/index.js',
   output: {
     path: __dirname,
-    filename: 'bundle.js'
+    filename: 'dist/js/bundle.js'
   },
+  plugins: [
+    new ExtractTextPlugin('dist/styles/main.css', {
+      allChunks: true
+    })
+  ],
   module: {
     loaders: [
       {
@@ -17,7 +24,11 @@ module.exports = {
             test: /\.css$/,
             loader: 'style!css?modules',
             include: /flexboxgrid/,
-        }
+        },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('css!sass')
+      }
     ]
   }
 };

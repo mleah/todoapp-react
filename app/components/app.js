@@ -5,6 +5,8 @@ import ToDoListContainer from './todoListContainer.js'
 import AddItemFormContainer from './addItemFormContainer.js'
 import SortTodoForm from './sortTodo.js'
 import FilterTodoForm from './filterToDo.js'
+import ToDoChartContainer from './todoChartContainer.js'
+import style from '../main.scss';
 
 
 // Needed for onTouchTap
@@ -13,18 +15,7 @@ injectTapEventPlugin();
 
 
 const {Grid, Row, Col} = require('react-flexbox-grid');
-var ChartistGraph = require('react-chartist')
 
-var lineChartData = {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8],
-    series: [
-        [5, 9, 7, 8, 5, 3, 5, 4]
-    ]
-}
-var lineChartOptions = {
-    low: 0,
-    showArea: true
-}
 
 
 
@@ -41,11 +32,13 @@ const App = () => (
                     <SortTodoForm />
                     <FilterTodoForm />
                 </Col>
+                <Col xs ={6}>
+                    <ToDoChartContainer />
+                </Col>
             </Row>
             <Row>
                 <ToDoListContainer />
             </Row>
-            <ChartistGraph data={lineChartData} options={lineChartOptions} type={'Line'} />
         </Grid>
     </MuiThemeProvider>
 );

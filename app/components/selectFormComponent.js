@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 
-const {Grid, Row, Col} = require('react-flexbox-grid');
+const { Row } = require('react-flexbox-grid');
 
 class SelectFormComponent extends React.Component {
     constructor(props) {
