@@ -69,8 +69,6 @@ function getCurrentDay() {
 
     if(mm<10) mm='0'+mm;
 
-
-
     return yyyy + "-" + mm + "-" + dd;
 }
 
