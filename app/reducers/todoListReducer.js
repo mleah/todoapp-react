@@ -4,16 +4,16 @@ import { SortTypes } from '../actions/sortActions.js'
 // import moment from 'moment/moment.js';
 
 const initialTodos = [
-    {id: 1, text: "Learn React", completed: false, dueDate: "", completedOn: false},
-    {id: 2, text: "Learn Redux", completed: true, dueDate: "2016-12-12", completedOn: "2016-10-10"},
-    {id: 3, text: "Learn ES6", completed: false, dueDate: "2016-01-01", completedOn: false},
-    {id: 4, text: "Learn typescript", completed: false, dueDate: "2016-12-01", completedOn: false},
-    {id: 5, text: "Learn Node", completed: false, dueDate: "", completedOn: false},
-    {id: 6, text: "Hello World", completed: true, dueDate: "2016-11-12", completedOn: "2016-10-11"},
-    {id: 7, text: "Fizzbuzz", completed: true, dueDate: "2016-11-01", completedOn: "2016-10-13"},
-    {id: 8, text: "bleep bloop", completed: true, dueDate: "2017-2-13", completedOn: "2016-10-13"},
-    {id: 9, text: "foo", completed: true, dueDate: "2016-12-30", completedOn: "2016-10-13"},
-    {id: 10, text: "bar", completed: false, dueDate: "2016-11-23", completedOn: false}
+    {dateAdded: 1, text: "Learn React", completed: false, dueDate: "", completedOn: false},
+    {dateAdded: 2, text: "Learn Redux", completed: true, dueDate: "2016-12-12", completedOn: "2016-10-10"},
+    {dateAdded: 3, text: "Learn ES6", completed: false, dueDate: "2016-01-01", completedOn: false},
+    {dateAdded: 4, text: "Learn typescript", completed: false, dueDate: "2016-12-01", completedOn: false},
+    {dateAdded: 5, text: "Learn Node", completed: false, dueDate: "", completedOn: false},
+    {dateAdded: 6, text: "Hello World", completed: true, dueDate: "2016-11-12", completedOn: "2016-10-11"},
+    {dateAdded: 7, text: "Fizzbuzz", completed: true, dueDate: "2016-11-01", completedOn: "2016-10-13"},
+    {dateAdded: 8, text: "bleep bloop", completed: true, dueDate: "2017-2-13", completedOn: "2016-10-13"},
+    {dateAdded: 9, text: "foo", completed: true, dueDate: "2016-12-30", completedOn: "2016-10-13"},
+    {dateAdded: 10, text: "bar", completed: false, dueDate: "2016-11-23", completedOn: false}
 ];
 
 function todos(state = initialTodos, action) {
@@ -22,7 +22,7 @@ function todos(state = initialTodos, action) {
             return [
                 ...state,
                 {
-                    id: Date.now(),
+                    dateAdded: Date.now(),
                     text: action.text,
                     completed: false,
                     dueDate: action.dueDate,
@@ -31,7 +31,7 @@ function todos(state = initialTodos, action) {
             ];
         case TOGGLE_TODO:
             return state.map((todo) => {
-                if (todo.id === action.id) {
+                if (todo.dateAdded === action.dateAdded) {
                     return Object.assign({}, todo, {
                         completedOn: !todo.completed ? getCurrentDay() : false,
                         completed: !todo.completed
@@ -41,9 +41,10 @@ function todos(state = initialTodos, action) {
             });
 
         case DELETE_TODO:
-            return state.filter(todo => todo.id !== action.id);
+            return state.filter(todo => todo.dateAdded !== action.dateAdded);
 
 
+            //ToDo consider sorting in the containing component instead of updating state
         case SORT_TODO_LIST:
 
             const newState = Object.assign([], state);
@@ -52,7 +53,7 @@ function todos(state = initialTodos, action) {
                 return sortByDate(action.sortType, newState);
             }
 
-            return newState.sort((firstToDo, secondToDo) => firstToDo.id - secondToDo.id);
+            return newState.sort((firstToDo, secondToDo) => firstToDo.dateAdded - secondToDo.dateAdded);
 
         default:
             return state
