@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import TodoItem from './ToDoItem.js'
-
-const { Row } = require('react-flexbox-grid');
+import { Row } from 'react-flexbox-grid'
 
 class TodoList extends React.Component {
     constructor(props) {

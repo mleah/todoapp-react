@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
-import Checkbox from 'material-ui/Checkbox';
-
-const {Row, Col} = require('react-flexbox-grid');
+import Checkbox from 'material-ui/Checkbox'
+import { Row, Col } from 'react-flexbox-grid'
 
 const TodoItem = ({ onTodoClick, onDeleteClick, completed, text, dueDate }) => {
 

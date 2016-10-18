@@ -6,18 +6,12 @@ import AddItemFormContainer from './addItemFormContainer.js'
 import SortTodoForm from './sortTodo.js'
 import FilterTodoForm from './filterToDo.js'
 import ToDoChartContainer from './todoChartContainer.js'
-import style from '../main.scss';
+import {Grid, Row, Col} from 'react-flexbox-grid'
 
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
-
-
-const {Grid, Row, Col} = require('react-flexbox-grid');
-
-
-
 
 
 const App = () => (

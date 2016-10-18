@@ -1,13 +1,12 @@
 import React, {PropTypes} from 'react'
-
-const { Row } = require('react-flexbox-grid');
+import { Row } from 'react-flexbox-grid'
 
 class SelectFormComponent extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
-        let sortOption;
+        let sortOption;  //ToDO investigate using state here instead of using ref
 
         const handleChange = event => {
             event.preventDefault();
@@ -16,7 +15,6 @@ class SelectFormComponent extends React.Component {
             if(this.props.secondOnChangeDispatch) {
                 this.props.secondOnChangeDispatch(sortOption.value);
             }
-
         };
 
         return (

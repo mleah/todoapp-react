@@ -72,6 +72,7 @@ function getCurrentDay() {
     return yyyy + "-" + mm + "-" + dd;
 }
 
+
 function sortByDate(sortType, newState) {
     return newState.sort((firstToDo, secondToDo) => {
         const [dueDateOne, dueDateTwo] = [firstToDo, secondToDo].map(todo => {
@@ -86,7 +87,6 @@ function sortByDate(sortType, newState) {
     });
 
 }
-
 
 export default todos
 

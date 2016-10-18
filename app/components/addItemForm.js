@@ -2,9 +2,7 @@ import React, { PropTypes } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import DatePicker from 'material-ui/DatePicker'
 import TextField from 'material-ui/TextField'
-
-
-const {Grid, Row, Col} = require('react-flexbox-grid');
+import { Row } from 'react-flexbox-grid'
 
 
 class AddItemForm extends React.Component {
@@ -14,7 +12,7 @@ class AddItemForm extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({errorText: ""});
+        this.setState({errorText: ''});
     }
 
 
@@ -24,7 +22,8 @@ class AddItemForm extends React.Component {
         const handleSubmit = event => {
             event.preventDefault();
 
-            //may come back here later to use state instead of using refs
+            //ToDo may come back here later to use state instead of using refs, make this consistent
+
             let newDate = dateInput.refs.input.input.value;
             let newTodo = this.refs.todoInput.getValue();
 

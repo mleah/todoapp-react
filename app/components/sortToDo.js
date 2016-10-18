@@ -5,6 +5,7 @@ import { sortTodos } from '../actions/todoListActions.js'
 import { currentSort, SortTypes } from '../actions/sortActions.js'
 
 
+//ToDo investigate adding these props a different way since none come from state
 const mapStateToProps = () => {
     return {
         defaultOption: SortTypes.DATE_ADDED,

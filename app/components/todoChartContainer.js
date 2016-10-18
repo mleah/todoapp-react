@@ -30,11 +30,12 @@ const isCompletedInFuture = (dateCompleted, dayOfWeek) => {
 };
 
 
+
 const mapStateToProps = (state) => {
     return {
         weeklyCompletedToDos:  mapCompletedTodos(state.todos),
         weeklyActiveToDos: mapActiveTodos(state.todos),
-        weekList: weekArray
+        dateRange: weekArray
     }
 };
 
