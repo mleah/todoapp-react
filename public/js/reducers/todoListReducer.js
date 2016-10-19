@@ -31,7 +31,7 @@ function todos(state = initialTodos, action) {
             ];
         case TOGGLE_TODO:
             return state.map((todo) => {
-                if (todo.dateAdded === action.dateAdded) {
+                if (todo.dateAdded === action.id) {
                     return Object.assign({}, todo, {
                         completedOn: !todo.completed ? getCurrentDay() : false,
                         completed: !todo.completed
@@ -41,7 +41,7 @@ function todos(state = initialTodos, action) {
             });
 
         case DELETE_TODO:
-            return state.filter(todo => todo.dateAdded !== action.dateAdded);
+            return state.filter(todo => todo.dateAdded !== action.id);
 
 
             //ToDo consider sorting in the containing component instead of updating state
