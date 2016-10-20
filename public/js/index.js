@@ -8,7 +8,9 @@ import thunk from 'redux-thunk';
 import 'babel-polyfill'
 import fetch from 'isomorphic-fetch'
 
-let store = createStore(todoApp, applyMiddleware(thunk));
+let store = createStore(
+    todoApp,
+    applyMiddleware(thunk));
 
 let unsubscribe = store.subscribe(() =>
     console.log(store.getState())

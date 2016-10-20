@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import SelectFormComponent from './selectFormComponent.js'
-import { sortTodos } from '../actions/todoListActions.js'
 import { currentSort, SortTypes } from '../actions/sortActions.js'
 
 
@@ -20,10 +19,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        firstOnChangeDispatch: (sortType) => {
-            dispatch(sortTodos(sortType))
-        },
-        secondOnChangeDispatch: (newSort) => {
+        firstOnChangeDispatch:  (newSort) => {
             dispatch(currentSort(newSort))
         }
     }

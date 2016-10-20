@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack && cp index.html dist/index.html",
-    "build-server": "webpack && cp index.html dist/index.html && webpack-dev-server --colors --hot --content-base dist/",
+    "build-server": "webpack-dev-server --colors --hot --content-base dist/",
     "hapi-server": "node routes/index.js"
   },
   "keywords": [

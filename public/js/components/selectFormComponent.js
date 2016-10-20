@@ -11,10 +11,6 @@ class SelectFormComponent extends React.Component {
         const handleChange = event => {
             event.preventDefault();
             this.props.firstOnChangeDispatch(sortOption.value);
-
-            if(this.props.secondOnChangeDispatch) {
-                this.props.secondOnChangeDispatch(sortOption.value);
-            }
         };
 
         return (

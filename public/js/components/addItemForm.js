@@ -33,7 +33,6 @@ class AddItemForm extends React.Component {
             }
 
             this.props.onAddTodo(newTodo, newDate);
-            this.props.updateSorting(this.props.sortType);
 
             this.refs.todoInputForm.reset();
             dateInput.refs.input.input.value = '';
@@ -64,9 +63,7 @@ const beforeCurrentDate = incomingDate => {
 };
 
 AddItemForm.propTypes = {
-    sortType: PropTypes.string.isRequired,
-    onAddTodo: PropTypes.func.isRequired,
-    updateSorting: PropTypes.func.isRequired
+    onAddTodo: PropTypes.func.isRequired
 };
 
 export default AddItemForm

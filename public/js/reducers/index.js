@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import todos from './todoListReducer.js'
+import todoList from './todoListReducer.js'
 import currentSort from './currentSortReducer.js'
 import visibilityFilter from './filterReducer.js'
 
 const todoApp = combineReducers({
-    todos,
+    todoList,
     currentSort,
     visibilityFilter
 });

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addTodo, sortTodos } from '../actions/todoListActions.js'
+import { addTodo } from '../actions/todoListActions.js'
 import AddItemForm from './addItemForm.js'
 
 
@@ -14,9 +14,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddTodo: (text, dueDate) => {
             dispatch(addTodo(text, dueDate))
-        },
-        updateSorting: (newSort) => {
-            dispatch(sortTodos(newSort))
         }
     }
 };

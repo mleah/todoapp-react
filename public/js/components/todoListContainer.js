@@ -1,7 +1,39 @@
 import { connect } from 'react-redux'
 import { toggleTodo, deleteTodo } from '../actions/todoListActions.js'
 import TodoList from './todoList.js'
+import { SortTypes } from '../actions/sortActions.js'
 
+
+const sortAndFilterTodoList = (state) => {
+    let sortedArray = sortToDos(state.todoList.items, state.currentSort);
+
+    return getVisibleTodos(sortedArray, state.visibilityFilter);
+};
+
+const sortToDos = (todoArray, sortType) => {
+
+    if (sortType !== SortTypes.DATE_ADDED) {
+        return sortByDate(sortType, todoArray);
+    }
+
+    return todoArray.sort((firstToDo, secondToDo) => firstToDo.dateAdded - secondToDo.dateAdded);
+};
+
+
+function sortByDate(sortType, todoArray) {
+    return todoArray.slice().sort((firstToDo, secondToDo) => {
+        const [dueDateOne, dueDateTwo] = [firstToDo, secondToDo].map(todo => {
+            let date = new Date(todo.dueDate);
+            if (date == "Invalid Date") {
+                date = -Infinity;
+            }
+            return date;
+        });
+
+        return sortType === SortTypes.DUE_DATE_ASC ? dueDateOne - dueDateTwo : dueDateTwo - dueDateOne;
+    });
+
+}
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {
@@ -16,7 +48,7 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = (state) => {
     return {
-        list:  getVisibleTodos(state.todos, state.visibilityFilter)
+        list:  sortAndFilterTodoList(state)
     }
 };
 

@@ -1,5 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SORT_TODO_LIST } from '../actions/todoListActions.js'
-import { SortTypes } from '../actions/sortActions.js'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, REQUEST_TODO_LIST, RECEIVE_TODO_LIST } from '../actions/todoListActions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 
@@ -17,22 +16,28 @@ const initialTodos = [
     {dateAdded: 10, text: "bar", completed: false, dueDate: "2016-11-23", completedOn: false}
 ];
 
-function todos(state = initialTodos, action) {
+function todoList(state = {
+    isFetching: false,
+    items: initialTodos
+}, action) {
     switch (action.type) {
+
         case ADD_TODO:
 
-            return [
-                ...state,
-                {
-                    dateAdded: Date.now(),
-                    text: action.text,
-                    completed: false,
-                    dueDate: action.dueDate,
-                    completedOn: false
-                }
-            ];
+            return Object.assign({}, state, { items:  [
+                    ...state.items,
+                    {
+                        dateAdded: Date.now(),
+                        text: action.text,
+                        completed: false,
+                        dueDate: action.dueDate,
+                        completedOn: false
+                    }
+                ]}
+            );
+
         case TOGGLE_TODO:
-            return state.map((todo) => {
+            let toggledTodoList = state.items.map((todo) => {
                 if (todo.dateAdded === action.id) {
                     return Object.assign({}, todo, {
                         completedOn: !todo.completed ? getCurrentDay() : false,
@@ -42,20 +47,24 @@ function todos(state = initialTodos, action) {
                 return todo
             });
 
+            return Object.assign({}, state, { items: toggledTodoList});
+
         case DELETE_TODO:
-            return state.filter(todo => todo.dateAdded !== action.id);
+            let updatedTodoList = state.items.filter(todo => todo.dateAdded !== action.id);
+            return Object.assign({}, state, { items: updatedTodoList});
 
 
-            //ToDo consider sorting in the containing component instead of updating state
-        case SORT_TODO_LIST:
+        case REQUEST_TODO_LIST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
 
-            const newState = Object.assign([], state);
-
-            if (action.sortType !== SortTypes.DATE_ADDED) {
-                return sortByDate(action.sortType, newState);
-            }
-
-            return newState.sort((firstToDo, secondToDo) => firstToDo.dateAdded - secondToDo.dateAdded);
+        case RECEIVE_TODO_LIST:
+            return Object.assign({}, state, {
+                isFetching: false,
+                items: action.listItems,
+                lastUpdated: action.receivedAt
+            });
 
         default:
             return state
@@ -76,20 +85,5 @@ function getCurrentDay() {
 }
 
 
-function sortByDate(sortType, newState) {
-    return newState.sort((firstToDo, secondToDo) => {
-        const [dueDateOne, dueDateTwo] = [firstToDo, secondToDo].map(todo => {
-            let date = new Date(todo.dueDate);
-            if (date == "Invalid Date") {
-                date = -Infinity;
-            }
-            return date;
-        });
-
-        return sortType === SortTypes.DUE_DATE_ASC ? dueDateOne - dueDateTwo : dueDateTwo - dueDateOne;
-    });
-
-}
-
-export default todos
+export default todoList
 
