@@ -3,6 +3,7 @@ import { SortTypes } from '../actions/sortActions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 
+
 const initialTodos = [
     {dateAdded: 1, text: "Learn React", completed: false, dueDate: "", completedOn: false},
     {dateAdded: 2, text: "Learn Redux", completed: true, dueDate: "2016-12-12", completedOn: "2016-10-10"},
@@ -19,6 +20,7 @@ const initialTodos = [
 function todos(state = initialTodos, action) {
     switch (action.type) {
         case ADD_TODO:
+
             return [
                 ...state,
                 {

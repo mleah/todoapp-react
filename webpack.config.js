@@ -20,11 +20,15 @@ module.exports = {
         query: {
           presets: [ 'es2015', 'react' ] }
       },
-        {
-            test: /\.css$/,
-            loader: 'style!css?modules',
-            include: /flexboxgrid/,
-        },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css?modules',
+        include: /flexboxgrid/,
+      },
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('css!sass')
