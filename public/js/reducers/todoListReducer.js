@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, REQUEST_TODO_LIST, RECEIVE_TODO_LIST, FAILURE_TODO_LIST } from '../actions/todoListActions.js'
+import { TOGGLE_TODO, DELETE_TODO, TOGGLE_IS_FETCHING, RECEIVE_TODO_LIST, FAILURE_TODO_LIST } from '../actions/todoListActions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 
@@ -10,20 +10,6 @@ function todoList(state = {
     error: null
 }, action) {
     switch (action.type) {
-
-        case ADD_TODO:
-
-            return Object.assign({}, state, { items:  [
-                    ...state.items,
-                    {
-                        dateAdded: Date.now(),
-                        text: action.text,
-                        completed: false,
-                        dueDate: action.dueDate,
-                        completedOn: false
-                    }
-                ]}
-            );
 
         case TOGGLE_TODO:
             let toggledTodoList = state.items.map((todo) => {
@@ -43,12 +29,13 @@ function todoList(state = {
             return Object.assign({}, state, { items: updatedTodoList});
 
 
-        case REQUEST_TODO_LIST:
+        case TOGGLE_IS_FETCHING:
             return Object.assign({}, state, {
                 isFetching: true
             });
 
         case RECEIVE_TODO_LIST:
+            console.log("ACtion in reducer ", action);
             return Object.assign({}, state, {
                 isFetching: false,
                 items: action.listItems,

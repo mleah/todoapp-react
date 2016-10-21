@@ -39,7 +39,7 @@ server.register([
 });
 
 
-const todos = [
+let todos = [
     {dateAdded: 1, text: "Learn React", completed: false, dueDate: "", completedOn: false},
     {dateAdded: 2, text: "Learn Redux", completed: true, dueDate: "2016-12-12", completedOn: "2016-10-10"},
     {dateAdded: 3, text: "Learn ES6", completed: false, dueDate: "2016-01-01", completedOn: false},
@@ -59,3 +59,26 @@ server.route({
         reply({ 'todos' : todos });
     }
 });
+
+server.route({
+    method: 'POST',
+    path: '/api',
+    config: {
+        handler: function(request, reply) {
+            let payload = JSON.parse(request.payload);
+            let newToDo = {
+                dateAdded: payload["dateAdded"],
+                text: payload["text"],
+                completed: payload["completed"],
+                dueDate: payload["dueDate"],
+                completedOn: payload["completedOn"]
+
+            };
+            todos.push(newToDo);
+            reply({ 'todos' : todos });
+        }
+    }
+});
+
+//POST method to add a new todoitem
+//DELETE to delete a todoitem

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack && cp index.html dist/index.html",
+    "build": "webpack && cp index.html dist/index.html && cp public/styles/styles.css dist/styles/styles.css",
     "build-server": "webpack-dev-server --colors --hot --content-base dist/",
     "hapi-server": "node routes/index.js"
   },
@@ -49,7 +49,6 @@
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.25.0",
-    "extract-text-webpack-plugin": "^1.0.1",
     "moment": "^2.15.1",
     "redux-devtools": "^3.3.1",
     "sass-loader": "^4.0.2",

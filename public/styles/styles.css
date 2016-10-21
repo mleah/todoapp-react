@@ -1,0 +1,12 @@
+button, option, input {
+    font-family: 'Roboto', serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+body {
+    font-family: 'Roboto', serif;
+    font-size: 24px;
+}
