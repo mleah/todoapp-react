@@ -16,6 +16,9 @@ class TodoList extends React.Component {
 
         return (
             <Row className="todoListContainer">
+                {this.props.isFetching && this.props.list.length === 0 &&
+                <h2>Loading...</h2>
+                }
                 <ul>
                     {todoElement}
                 </ul>
@@ -27,7 +30,8 @@ class TodoList extends React.Component {
 TodoList.propTypes = {
     list: PropTypes.array.isRequired,
     onTodoClick: PropTypes.func.isRequired,
-    onDeleteClick: PropTypes.func.isRequired
+    onDeleteClick: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool
 };
 
 export default TodoList

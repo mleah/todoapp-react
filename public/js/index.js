@@ -6,7 +6,8 @@ import todoApp from './reducers/index.js'
 import App from './components/app.js'
 import thunk from 'redux-thunk';
 import 'babel-polyfill'
-import fetch from 'isomorphic-fetch'
+import { fetchToDoList } from './actions/todoListActions.js'
+
 
 let store = createStore(
     todoApp,
@@ -17,17 +18,8 @@ let unsubscribe = store.subscribe(() =>
 )
 
 
-fetch('http://localhost:3000/api')
-    .then(function(response) {
-        if (response.status >= 400) {
-            throw new Error("Bad response from server");
-        }
-        return response.json();
-    })
-    .then(function(api) {
-        console.log(api);
-        return api;
-    });
+store.dispatch(fetchToDoList());
+
 
 render(
     <Provider store={store}>

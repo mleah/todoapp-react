@@ -32,7 +32,6 @@ function sortByDate(sortType, todoArray) {
 
         return sortType === SortTypes.DUE_DATE_ASC ? dueDateOne - dueDateTwo : dueDateTwo - dueDateOne;
     });
-
 }
 
 const getVisibleTodos = (todos, filter) => {
@@ -46,9 +45,12 @@ const getVisibleTodos = (todos, filter) => {
     }
 };
 
+
 const mapStateToProps = (state) => {
     return {
-        list:  sortAndFilterTodoList(state)
+        list:  sortAndFilterTodoList(state),
+        isFetching: state.todoList.isFetching,
+        error: state.todoList.error
     }
 };
 

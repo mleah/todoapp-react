@@ -1,24 +1,13 @@
-import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, REQUEST_TODO_LIST, RECEIVE_TODO_LIST } from '../actions/todoListActions.js'
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, REQUEST_TODO_LIST, RECEIVE_TODO_LIST, FAILURE_TODO_LIST } from '../actions/todoListActions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 
 
-const initialTodos = [
-    {dateAdded: 1, text: "Learn React", completed: false, dueDate: "", completedOn: false},
-    {dateAdded: 2, text: "Learn Redux", completed: true, dueDate: "2016-12-12", completedOn: "2016-10-10"},
-    {dateAdded: 3, text: "Learn ES6", completed: false, dueDate: "2016-01-01", completedOn: false},
-    {dateAdded: 4, text: "Learn typescript", completed: false, dueDate: "2016-12-01", completedOn: false},
-    {dateAdded: 5, text: "Learn Node", completed: false, dueDate: "", completedOn: false},
-    {dateAdded: 6, text: "Hello World", completed: true, dueDate: "2016-11-12", completedOn: "2016-10-11"},
-    {dateAdded: 7, text: "Fizzbuzz", completed: true, dueDate: "2016-11-01", completedOn: "2016-10-13"},
-    {dateAdded: 8, text: "bleep bloop", completed: true, dueDate: "2017-2-13", completedOn: "2016-10-13"},
-    {dateAdded: 9, text: "foo", completed: true, dueDate: "2016-12-30", completedOn: "2016-10-13"},
-    {dateAdded: 10, text: "bar", completed: false, dueDate: "2016-11-23", completedOn: false}
-];
-
 function todoList(state = {
     isFetching: false,
-    items: initialTodos
+    items: [],
+    lastUpdated: null,
+    error: null
 }, action) {
     switch (action.type) {
 
@@ -63,7 +52,14 @@ function todoList(state = {
             return Object.assign({}, state, {
                 isFetching: false,
                 items: action.listItems,
-                lastUpdated: action.receivedAt
+                lastUpdated: action.receivedAt,
+                error: null
+            });
+
+        case FAILURE_TODO_LIST:
+            return Object.assign({}, state, {
+                isFetching: false,
+                error: action.error.error
             });
 
         default:
