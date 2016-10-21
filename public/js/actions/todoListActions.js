@@ -8,11 +8,6 @@ export const FAILURE_TODO_LIST = 'FAILURE_TODO_LIST';
 
 
 
-
-export function toggleTodo(id) {
-    return { type: TOGGLE_TODO, id }
-}
-
 export function deleteTodo(id) {
     return {type: DELETE_TODO, id}
 }
@@ -22,7 +17,6 @@ export function toggleIsFetching(todoList) {
         type: TOGGLE_IS_FETCHING,
         todoList}
 }
-
 
 export function receiveToDoList(jsonResponse) {
     return {
@@ -94,4 +88,27 @@ export function addTodo(text, dueDate) {
 }
 
 
+export function toggleTodo(id) {
+
+    return function (dispatch) {
+
+        dispatch(toggleIsFetching());
+
+        return fetch('http://localhost:3000/api/todo/' + id + '/toggleComplete', {
+            method: 'PUT',
+            headers: new Headers({
+                'Content-Type': 'text/json'
+            })
+        })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                dispatch(receiveToDoList(json));
+            })
+            .catch(function(error){
+                dispatch(failureToDoList(error));
+            });
+    }
+}
 

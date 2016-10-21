@@ -44,6 +44,7 @@ function todoList(state = {
             });
 
         case FAILURE_TODO_LIST:
+            console.log("FAILURE uh oh  ", action.error);
             return Object.assign({}, state, {
                 isFetching: false,
                 error: action.error.error

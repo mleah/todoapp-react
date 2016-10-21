@@ -28,7 +28,7 @@ server.register([
     {
         'register': HapiSwagger,
         'options': options
-    }], (err) => {
+    }], () => {
     server.start( (err) => {
         if (err) {
             console.log(err);
@@ -80,5 +80,39 @@ server.route({
     }
 });
 
-//POST method to add a new todoitem
+server.route({
+    method: 'PUT',
+    path: '/api/todo/{id}/toggleComplete',
+    config: {
+        handler: function(request, reply) {
+            let id = encodeURIComponent(request.params.id);
+
+            todos = todos.map((todo) => {
+                if (todo.dateAdded == id) {
+                    return Object.assign({}, todo, {
+                        completedOn: !todo.completed ? getCurrentDay() : false,
+                        completed: !todo.completed
+                    })
+                }
+                return todo
+            });
+            reply({ 'todos' : todos });
+        }
+    }
+});
+
+
+function getCurrentDay() {
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1;
+    let yyyy = today.getFullYear();
+
+    if(dd<10) dd='0'+dd;
+
+    if(mm<10) mm='0'+mm;
+
+    return yyyy + "-" + mm + "-" + dd;
+}
+
 //DELETE to delete a todoitem
