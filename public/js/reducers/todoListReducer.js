@@ -1,4 +1,4 @@
-import { TOGGLE_TODO, DELETE_TODO, TOGGLE_IS_FETCHING, RECEIVE_TODO_LIST, FAILURE_TODO_LIST } from '../actions/todoListActions.js'
+import { TOGGLE_IS_FETCHING, RECEIVE_TODO_LIST, FAILURE_TODO_LIST } from '../actions/todoListActions.js'
 // import _sortBy from "lodash/fp/sortBy";
 // import moment from 'moment/moment.js';
 
@@ -10,24 +10,6 @@ function todoList(state = {
     error: null
 }, action) {
     switch (action.type) {
-
-        case TOGGLE_TODO:
-            let toggledTodoList = state.items.map((todo) => {
-                if (todo.dateAdded === action.id) {
-                    return Object.assign({}, todo, {
-                        completedOn: !todo.completed ? getCurrentDay() : false,
-                        completed: !todo.completed
-                    })
-                }
-                return todo
-            });
-
-            return Object.assign({}, state, { items: toggledTodoList});
-
-        case DELETE_TODO:
-            let updatedTodoList = state.items.filter(todo => todo.dateAdded !== action.id);
-            return Object.assign({}, state, { items: updatedTodoList});
-
 
         case TOGGLE_IS_FETCHING:
             return Object.assign({}, state, {
@@ -54,20 +36,6 @@ function todoList(state = {
             return state
     }
 }
-
-function getCurrentDay() {
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1;
-    let yyyy = today.getFullYear();
-
-    if(dd<10) dd='0'+dd;
-
-    if(mm<10) mm='0'+mm;
-
-    return yyyy + "-" + mm + "-" + dd;
-}
-
 
 export default todoList
 

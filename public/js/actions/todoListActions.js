@@ -1,16 +1,9 @@
 import fetch from 'isomorphic-fetch'
 
-export const TOGGLE_TODO = 'TOGGLE_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
 export const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 export const RECEIVE_TODO_LIST = 'RECEIVE_TODO_LIST';
 export const FAILURE_TODO_LIST = 'FAILURE_TODO_LIST';
 
-
-
-export function deleteTodo(id) {
-    return {type: DELETE_TODO, id}
-}
 
 export function toggleIsFetching(todoList) {
     return {
@@ -95,11 +88,30 @@ export function toggleTodo(id) {
         dispatch(toggleIsFetching());
 
         return fetch('http://localhost:3000/api/todo/' + id + '/toggleComplete', {
-            method: 'PUT',
-            headers: new Headers({
-                'Content-Type': 'text/json'
-            })
+            method: 'PUT'
         })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                dispatch(receiveToDoList(json));
+            })
+            .catch(function(error){
+                dispatch(failureToDoList(error));
+            });
+    }
+}
+
+
+export function deleteTodo(id) {
+
+    return function (dispatch) {
+
+        dispatch(toggleIsFetching());
+
+        return fetch('http://localhost:3000/api/todo/' + id , {
+            method: 'DELETE'
+            })
             .then(function(response) {
                 return response.json();
             })

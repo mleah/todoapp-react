@@ -2,8 +2,9 @@ const Hapi = require('hapi');
 const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
-
 const server = new Hapi.Server();
+
+
 server.connection({
     host: 'localhost',
     port: 3000,
@@ -101,6 +102,18 @@ server.route({
     }
 });
 
+server.route({
+    method: 'DELETE',
+    path: '/api/todo/{id}',
+    config: {
+        handler: function(request, reply) {
+            let id = encodeURIComponent(request.params.id);
+
+            todos = todos.filter(todo => todo.dateAdded != id);
+            reply({ 'todos' : todos });
+        }
+    }
+});
 
 function getCurrentDay() {
     let today = new Date();
@@ -114,5 +127,3 @@ function getCurrentDay() {
 
     return yyyy + "-" + mm + "-" + dd;
 }
-
-//DELETE to delete a todoitem
