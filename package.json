@@ -19,6 +19,7 @@
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "babel-register": "^6.16.3",
+    "chart.js": "^2.3.0",
     "classnames": "^2.2.5",
     "es6-promise": "^4.0.5",
     "flexboxgrid": "^6.3.1",
@@ -35,7 +36,7 @@
     "pg": "^6.1.0",
     "pg-native": "^1.10.0",
     "react": "^15.0.0",
-    "react-chartist": "^0.10.2",
+    "react-chartjs-2": "^1.5.0",
     "react-dom": "^15.0.0",
     "react-flexbox-grid": "^0.10.2",
     "react-redux": "^4.4.5",

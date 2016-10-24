@@ -1,5 +1,5 @@
 ### Basic to do list app
 
-To get started, clone this repository, and run the following command in your terminal `npm install`.
+This app uses react, redux, and ES6.  The middleware is hapi.js, and it uses a PostgreSQL database.
 
-To view in the browser - run `npm run build`.  Then, open `index.html`.
+Directions to use forthcoming...

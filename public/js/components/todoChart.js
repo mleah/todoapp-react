@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import ChartistGraph from 'react-chartist'
+import { Line } from 'react-chartjs-2';
 
 
 class ToDoChart extends React.Component {
@@ -8,18 +8,50 @@ class ToDoChart extends React.Component {
     }
 
     render() {
-        const lineChartData = {
+
+        let data = {
             labels: this.props.dateRange,
-            series: [this.props.weeklyActiveToDos,
-                this.props.weeklyCompletedToDos
+            datasets: [
+                {
+                    type: 'line',
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: '#0067a0',
+                    borderColor: '#0067a0',
+                    borderWidth: 1,
+                    data: this.props.weeklyActiveToDos,
+                },
+                {
+                    type: 'line',
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: '#ff0000',
+                    borderColor: '#ff0000',
+                    borderWidth: 1,
+                    data: this.props.weeklyCompletedToDos,
+
+                }
             ]
         };
-        const lineChartOptions = {
-            low: 0,
-            showArea: true
+
+        let options = {
+            maintainAspectRatio: false,
+            legend: {
+                display: false,
+                position: 'bottom'
+            }
         };
 
-        return <ChartistGraph data={lineChartData} options={lineChartOptions} type={'Line'} />;
+        return (
+            <div className="chart-container">
+                <Line
+                    data={data}
+                    options={options}
+                    height={200}
+                    width={150}
+                />
+            </div>
+        )
     }
 }
 
