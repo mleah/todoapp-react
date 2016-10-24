@@ -1,3 +1,4 @@
 node_modules
 .idea
 dist
+routes/secret.js

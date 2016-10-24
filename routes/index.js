@@ -3,7 +3,7 @@ const Inert = require('inert');
 const Vision = require('vision');
 const HapiSwagger = require('hapi-swagger');
 const server = new Hapi.Server();
-
+const databaseSecret  = require('./secret.js');
 
 server.connection({
     host: 'localhost',
@@ -29,7 +29,15 @@ server.register([
     {
         'register': HapiSwagger,
         'options': options
-    }], () => {
+    },
+    {
+        register: require('hapi-node-postgres'),
+        options: {
+            connectionString: databaseSecret,
+            native: true
+        }
+    }
+    ], () => {
     server.start( (err) => {
         if (err) {
             console.log(err);
@@ -57,7 +65,20 @@ server.route({
     method: 'GET',
     path: '/api',
     handler: function(request, reply) {
-        reply({ 'todos' : todos });
+        request.pg.client.query('SELECT * FROM todos', function(error, result) {
+           console.log(result);
+            todos = result.rows.map( (todo) => {
+                return {
+                    id: todo.id,
+                    dateAdded: todo.date_added,
+                    text: todo.text,
+                    completed: todo.completed,
+                    dueDate: todo.due_date,
+                    completedOn: todo.completed_on
+                }
+            });
+            reply({ 'todos' : todos });
+        });
     }
 });
 
@@ -68,6 +89,7 @@ server.route({
         handler: function(request, reply) {
             let payload = JSON.parse(request.payload);
             let newToDo = {
+                id: payload["dateAdded"],
                 dateAdded: payload["dateAdded"],
                 text: payload["text"],
                 completed: payload["completed"],
@@ -89,7 +111,7 @@ server.route({
             let id = encodeURIComponent(request.params.id);
 
             todos = todos.map((todo) => {
-                if (todo.dateAdded == id) {
+                if (todo.id == id) {
                     return Object.assign({}, todo, {
                         completedOn: !todo.completed ? getCurrentDay() : false,
                         completed: !todo.completed
@@ -109,7 +131,7 @@ server.route({
         handler: function(request, reply) {
             let id = encodeURIComponent(request.params.id);
 
-            todos = todos.filter(todo => todo.dateAdded != id);
+            todos = todos.filter(todo => todo.id != id);
             reply({ 'todos' : todos });
         }
     }
