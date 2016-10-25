@@ -62,6 +62,7 @@ const getTodosFromDb = (request, reply) => {
                 completedOn: todo.completed_on
             }
         });
+        console.log(todos);
         reply({ 'todos' : todos });
     });
 };
@@ -78,9 +79,10 @@ server.route({
     config: {
         handler: function(request, reply) {
             const payload = JSON.parse(request.payload);
-            const addToDoQuery = 'INSERT INTO todos (date_added, text, completed, due_date, completed_on) VALUES ($1, $2, $3, $4, $5)';
+            const addToDoQuery = `INSERT INTO todos (date_added, text, completed, due_date, completed_on) 
+                                    VALUES ($1, $2, $3, $4, $5)`;
 
-            request.pg.client.query(addToDoQuery, [payload.dateAdded, payload.text, payload.completed, payload.dueDate, payload.completedOn], function(error, result) {
+            request.pg.client.query(addToDoQuery, [payload.dateAdded, payload.text, payload.completed, payload.dueDate, payload.completedOn], function() {
 
                 getTodosFromDb(request, reply);
 
@@ -94,18 +96,21 @@ server.route({
     path: '/api/todo/{id}/toggleComplete',
     config: {
         handler: function(request, reply) {
-            const id = encodeURIComponent(request.params.id);
+            let id = encodeURIComponent(request.params.id);
+            const updateToDoQuery = `UPDATE todos
+                                        SET completed = NOT completed, 
+                                            completed_on = (CASE 
+                                                WHEN completed = true THEN null 
+                                                ELSE $1::TIMESTAMP WITH TIME ZONE 
+                                            END) 
+                                        WHERE id = $2`;
 
-            todos = todos.map((todo) => {
-                if (todo.id == id) {
-                    return Object.assign({}, todo, {
-                        completedOn: !todo.completed ? getCurrentDay() : false,
-                        completed: !todo.completed
-                    })
-                }
-                return todo
+            const currentDay = getCurrentDay();
+
+            request.pg.client.query(updateToDoQuery, [currentDay, id], function() {
+                getTodosFromDb(request, reply);
+
             });
-            reply({ 'todos' : todos });
         }
     }
 });
@@ -124,14 +129,6 @@ server.route({
 });
 
 function getCurrentDay() {
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth()+1;
-    let yyyy = today.getFullYear();
-
-    if(dd<10) dd='0'+dd;
-
-    if(mm<10) mm='0'+mm;
-
-    return yyyy + "-" + mm + "-" + dd;
+    const now = new Date();
+    return new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
 }

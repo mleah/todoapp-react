@@ -12,10 +12,10 @@ export function fetchToDoList() {
 
 export function addTodo(text, dueDate) {
 
-    let now = new Date();
-    let now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+    const now = new Date();
+    const now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
 
-    let newTodo = {
+    const newTodo = {
         dateAdded: now_utc,
         text,
         completed: false,
