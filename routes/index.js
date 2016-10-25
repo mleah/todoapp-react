@@ -115,15 +115,19 @@ server.route({
     }
 });
 
+
 server.route({
     method: 'DELETE',
     path: '/api/todo/{id}',
     config: {
         handler: function(request, reply) {
             const id = encodeURIComponent(request.params.id);
+            const deleteToDoQuery = `DELETE FROM todos WHERE id = $1`;
 
-            todos = todos.filter(todo => todo.id != id);
-            reply({ 'todos' : todos });
+            request.pg.client.query(deleteToDoQuery, [id], function() {
+                getTodosFromDb(request, reply);
+
+            });
         }
     }
 });
