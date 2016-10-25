@@ -12,12 +12,15 @@ export function fetchToDoList() {
 
 export function addTodo(text, dueDate) {
 
+    let now = new Date();
+    let now_utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+
     let newTodo = {
-        dateAdded: Date.now(),
-        text: text,
+        dateAdded: now_utc,
+        text,
         completed: false,
-        dueDate: dueDate,
-        completedOn: false
+        dueDate: dueDate ? dueDate : null,
+        completedOn: null
     };
 
     return apiCallThunk(fetch('http://localhost:3000/api', {

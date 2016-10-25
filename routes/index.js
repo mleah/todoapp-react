@@ -48,38 +48,28 @@ server.register([
 });
 
 
-let todos = [
-    {dateAdded: 1, text: "Learn React", completed: false, dueDate: "", completedOn: false},
-    {dateAdded: 2, text: "Learn Redux", completed: true, dueDate: "2016-12-12", completedOn: "2016-10-10"},
-    {dateAdded: 3, text: "Learn ES6", completed: false, dueDate: "2016-01-01", completedOn: false},
-    {dateAdded: 4, text: "Learn typescript", completed: false, dueDate: "2016-12-01", completedOn: false},
-    {dateAdded: 5, text: "Learn Node", completed: false, dueDate: "", completedOn: false},
-    {dateAdded: 6, text: "Hello World", completed: true, dueDate: "2016-11-12", completedOn: "2016-10-11"},
-    {dateAdded: 7, text: "Fizzbuzz", completed: true, dueDate: "2016-11-01", completedOn: "2016-10-13"},
-    {dateAdded: 8, text: "bleep bloop", completed: true, dueDate: "2017-2-13", completedOn: "2016-10-13"},
-    {dateAdded: 9, text: "foo", completed: true, dueDate: "2016-12-30", completedOn: "2016-10-13"},
-    {dateAdded: 10, text: "bar", completed: false, dueDate: "2016-11-23", completedOn: false}
-];
+let todos;
+
+const getTodosFromDb = (request, reply) => {
+    request.pg.client.query('SELECT * FROM todos', function(error, result) {
+        todos = result.rows.map( (todo) => {
+            return {
+                id: todo.id,
+                dateAdded: todo.date_added,
+                text: todo.text,
+                completed: todo.completed,
+                dueDate: todo.due_date,
+                completedOn: todo.completed_on
+            }
+        });
+        reply({ 'todos' : todos });
+    });
+};
 
 server.route({
     method: 'GET',
     path: '/api',
-    handler: function(request, reply) {
-        request.pg.client.query('SELECT * FROM todos', function(error, result) {
-           console.log(result);
-            todos = result.rows.map( (todo) => {
-                return {
-                    id: todo.id,
-                    dateAdded: todo.date_added,
-                    text: todo.text,
-                    completed: todo.completed,
-                    dueDate: todo.due_date,
-                    completedOn: todo.completed_on
-                }
-            });
-            reply({ 'todos' : todos });
-        });
-    }
+    handler: getTodosFromDb
 });
 
 server.route({
@@ -87,18 +77,14 @@ server.route({
     path: '/api',
     config: {
         handler: function(request, reply) {
-            let payload = JSON.parse(request.payload);
-            let newToDo = {
-                id: payload["dateAdded"],
-                dateAdded: payload["dateAdded"],
-                text: payload["text"],
-                completed: payload["completed"],
-                dueDate: payload["dueDate"],
-                completedOn: payload["completedOn"]
+            const payload = JSON.parse(request.payload);
+            const addToDoQuery = 'INSERT INTO todos (date_added, text, completed, due_date, completed_on) VALUES ($1, $2, $3, $4, $5)';
 
-            };
-            todos.push(newToDo);
-            reply({ 'todos' : todos });
+            request.pg.client.query(addToDoQuery, [payload.dateAdded, payload.text, payload.completed, payload.dueDate, payload.completedOn], function(error, result) {
+
+                getTodosFromDb(request, reply);
+
+            });
         }
     }
 });
@@ -108,7 +94,7 @@ server.route({
     path: '/api/todo/{id}/toggleComplete',
     config: {
         handler: function(request, reply) {
-            let id = encodeURIComponent(request.params.id);
+            const id = encodeURIComponent(request.params.id);
 
             todos = todos.map((todo) => {
                 if (todo.id == id) {
@@ -129,7 +115,7 @@ server.route({
     path: '/api/todo/{id}',
     config: {
         handler: function(request, reply) {
-            let id = encodeURIComponent(request.params.id);
+            const id = encodeURIComponent(request.params.id);
 
             todos = todos.filter(todo => todo.id != id);
             reply({ 'todos' : todos });
