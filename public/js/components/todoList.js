@@ -8,7 +8,7 @@ class TodoList extends React.Component {
     }
     render() {
         const todoElement = this.props.list.map((todo, index) =>
-            <TodoItem key={todo.dateAdded} {...todo}
+            <TodoItem key={todo.id} {...todo}
                       onTodoClick={() => this.props.onTodoClick(todo.id)}
                       onDeleteClick={() => this.props.onDeleteClick(todo.id)}
             />

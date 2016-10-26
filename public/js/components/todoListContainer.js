@@ -3,10 +3,8 @@ import { toggleTodo, deleteTodo } from '../actions/todoListActions.js'
 import TodoList from './todoList.js'
 import { SortTypes } from '../actions/sortActions.js'
 
-
 const sortAndFilterTodoList = (state) => {
-    let sortedArray = sortToDos(state.todoList.items, state.currentSort);
-
+    const sortedArray = sortToDos(state.todoList.items, state.currentSort);
     return getVisibleTodos(sortedArray, state.visibilityFilter);
 };
 
@@ -20,7 +18,7 @@ const sortToDos = (todoArray, sortType) => {
 };
 
 
-function sortByDate(sortType, todoArray) {
+const sortByDate = (sortType, todoArray)  => {
     return todoArray.slice().sort((firstToDo, secondToDo) => {
         const [dueDateOne, dueDateTwo] = [firstToDo, secondToDo].map(todo => {
             let date = new Date(todo.dueDate);
@@ -32,7 +30,7 @@ function sortByDate(sortType, todoArray) {
 
         return sortType === SortTypes.DUE_DATE_ASC ? dueDateOne - dueDateTwo : dueDateTwo - dueDateOne;
     });
-}
+};
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {

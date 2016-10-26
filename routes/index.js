@@ -15,7 +15,6 @@ server.connection({
     }
 });
 
-
 const options = {
     info: {
         'title': 'Test API Documentation',
