@@ -16,6 +16,8 @@ const mapCompletedTodos = (todos) => {
 };
 
 
+//ToDo refactor the boolean logic in mapActiveTodos
+
 const mapActiveTodos = (todos) => {
     return currentWeekLabels.map( day =>
         todos.filter( todo =>

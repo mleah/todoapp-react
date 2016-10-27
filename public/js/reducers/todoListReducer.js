@@ -1,6 +1,6 @@
 import { TOGGLE_IS_FETCHING, RECEIVE_TODO_LIST, FAILURE_TODO_LIST } from '../actions/todoListActions.js'
+import { SortTypes } from '../actions/sortActions.js'
 import moment from 'moment'
-// import _sortBy from "lodash/fp/sortBy";
 
 function todoList(state = {
     isFetching: false,
@@ -51,3 +51,44 @@ const convertUTCtoDate = (incomingUTC) => {
 
 export default todoList
 
+
+
+export const getSortedAndFilteredTodoList = (state, currentSort, visibility ) => {
+    const sortedArray = sortToDos(state.items, currentSort);
+    return filterVisibleTodos(sortedArray, visibility);
+};
+
+
+const sortToDos = (todoArray, sortType) => {
+    if (sortType !== SortTypes.DATE_ADDED) {
+        return sortByDate(sortType, todoArray);
+    }
+
+    return todoArray.sort((firstToDo, secondToDo) => firstToDo.id - secondToDo.id);
+};
+
+
+const sortByDate = (sortType, todoArray)  => {
+    return todoArray.slice().sort((firstToDo, secondToDo) => {
+        const [dueDateOne, dueDateTwo] = [firstToDo, secondToDo].map(todo => {
+            let date = new Date(todo.dueDate);
+            if (date == "Invalid Date") {
+                date = -Infinity;
+            }
+            return date;
+        });
+
+        return sortType === SortTypes.DUE_DATE_ASC ? dueDateOne - dueDateTwo : dueDateTwo - dueDateOne;
+    });
+};
+
+const filterVisibleTodos = (todos, filter) => {
+    switch (filter) {
+        case 'SHOW_ALL':
+            return todos;
+        case 'SHOW_COMPLETED':
+            return todos.filter(todo => todo.completed);
+        case 'SHOW_ACTIVE':
+            return todos.filter(todo => !todo.completed);
+    }
+};
