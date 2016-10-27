@@ -37,8 +37,7 @@ SelectFormComponent.propTypes = {
     defaultText: PropTypes.string.isRequired,
     optionOneText: PropTypes.string.isRequired,
     optionTwoText: PropTypes.string.isRequired,
-    firstOnChangeDispatch: PropTypes.func.isRequired,
-    secondOnChangeDispatch: PropTypes.func
+    firstOnChangeDispatch: PropTypes.func.isRequired
 };
 
 export default SelectFormComponent
