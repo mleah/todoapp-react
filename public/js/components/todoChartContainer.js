@@ -1,16 +1,11 @@
 import { connect } from 'react-redux'
 import ToDoChart from './todoChart.js'
-import moment from 'moment'
-
-const currentWeekLabels = [moment().startOf('week').format('YYYY-MM-DD'), moment().startOf('isoweek').format('YYYY-MM-DD'), moment().startOf('week').add(2, 'days').format('YYYY-MM-DD'),
-                    moment().startOf('week').add(3, 'days').format('YYYY-MM-DD'), moment().startOf('week').add(4, 'days').format('YYYY-MM-DD'),
-                    moment().startOf('week').add(5, 'days').format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')];
 
 
 //ToDo Extract and name each filter function
 
-const mapCompletedTodos = (todos) => {
-    return currentWeekLabels.map( day =>
+const mapCompletedTodos = (currentWeekArray, todos) => {
+    return currentWeekArray.map( day =>
         todos.filter( todo =>
             (todo.completedOn === day )).length)
 };
@@ -18,8 +13,8 @@ const mapCompletedTodos = (todos) => {
 
 //ToDo refactor the boolean logic in mapActiveTodos
 
-const mapActiveTodos = (todos) => {
-    return currentWeekLabels.map( day =>
+const mapActiveTodos = (currentWeekArray, todos) => {
+    return currentWeekArray.map( day =>
         todos.filter( todo =>
             (
                 (isActive(todo) && onOrAfterCreationDate(todo.dateAdded, day)) ||
@@ -48,9 +43,9 @@ const onOrAfterCreationDate = (dateAdded, currentDayOfWeek) => {
 
 const mapStateToProps = (state) => {
     return {
-        weeklyCompletedToDos:  mapCompletedTodos(state.todoList.items),
-        weeklyActiveToDos: mapActiveTodos(state.todoList.items),
-        dateRange: currentWeekLabels
+        weeklyCompletedToDos:  mapCompletedTodos(state.currentWeekDates, state.todoList.items),
+        weeklyActiveToDos: mapActiveTodos(state.currentWeekDates, state.todoList.items),
+        dateRange: state.currentWeekDates
     }
 };
 
