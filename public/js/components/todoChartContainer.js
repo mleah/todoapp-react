@@ -12,24 +12,36 @@ const currentWeekLabels = [moment().startOf('week').format('YYYY-MM-DD'), moment
 const mapCompletedTodos = (todos) => {
     return currentWeekLabels.map( day =>
         todos.filter( todo =>
-            todo.completedOn === day ).length)
+            (todo.completedOn === day )).length)
 };
+
 
 const mapActiveTodos = (todos) => {
     return currentWeekLabels.map( day =>
         todos.filter( todo =>
-            ( isActive(todo) || isCompletedInFuture(todo.completedOn, day) )).length)
+            (
+                (isActive(todo) && onOrAfterCreationDate(todo.dateAdded, day)) ||
+                (!isActive(todo) && beforeCompletionDate(todo.completedOn, day) && onOrAfterCreationDate(todo.dateAdded, day))
+            )
+        ).length)
 };
 
 
 const isActive = (todo) => todo.completedOn === null;
 
-const isCompletedInFuture = (dateCompleted, dayOfWeek) => {
+
+const beforeCompletionDate = (dateCompleted, currentDayOfWeek) => {
     let todoDateCompleted = new Date(dateCompleted);
-    let currentDate = new Date(dayOfWeek);
+    let currentDate = new Date(currentDayOfWeek);
     return currentDate < todoDateCompleted;
 };
 
+
+const onOrAfterCreationDate = (dateAdded, currentDayOfWeek) => {
+    let todoDateAdded = new Date(dateAdded);
+    let currentDate = new Date(currentDayOfWeek);
+    return currentDate >= todoDateAdded;
+};
 
 
 const mapStateToProps = (state) => {

@@ -14,7 +14,7 @@ const sortToDos = (todoArray, sortType) => {
         return sortByDate(sortType, todoArray);
     }
 
-    return todoArray.sort((firstToDo, secondToDo) => firstToDo.dateAdded - secondToDo.dateAdded);
+    return todoArray.sort((firstToDo, secondToDo) => firstToDo.id - secondToDo.id);
 };
 
 
