@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { toggleTodo, deleteTodo } from '../actions/todoListActions.js'
-import { getSortedAndFilteredTodoList } from '../reducers/index.js'
+import { getSortedAndFilteredTodoList } from '../selectors/todoListSelectors.js'
 import TodoList from './todoList.js'
 
 
