@@ -13,5 +13,12 @@ const todoApp = combineReducers({
 
 export default todoApp
 
+
 export const getSortedAndFilteredTodoList = (state) =>
     fromTodoList.getSortedAndFilteredTodoList(state.todoList, state.currentSort, state.visibilityFilter);
+
+export const getWeeklyCompletedTodos = (state) =>
+    fromTodoList.getWeeklyCompletedTodos(state.currentWeekDates, state.todoList);
+
+export const getWeeklyActiveTodos = (state) =>
+    fromTodoList.getWeeklyActiveTodos(state.currentWeekDates, state.todoList);

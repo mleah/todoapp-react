@@ -92,3 +92,41 @@ const filterVisibleTodos = (todos, filter) => {
             return todos.filter(todo => !todo.completed);
     }
 };
+
+
+export const getWeeklyCompletedTodos = (currentWeekArray, state) => {
+    console.log(currentWeekArray);
+    return currentWeekArray.map( day =>
+        state.items.filter( todo =>
+            (todo.completedOn === day )).length)
+};
+
+
+//ToDo refactor the boolean logic in mapActiveTodos
+
+export const getWeeklyActiveTodos = (currentWeekArray, state) => {
+    return currentWeekArray.map( day =>
+        state.items.filter( todo =>
+            (
+                (isActive(todo) && onOrAfterCreationDate(todo.dateAdded, day)) ||
+                (!isActive(todo) && beforeCompletionDate(todo.completedOn, day) && onOrAfterCreationDate(todo.dateAdded, day))
+            )
+        ).length)
+};
+
+
+const isActive = (todo) => todo.completedOn === null;
+
+
+const beforeCompletionDate = (dateCompleted, currentDayOfWeek) => {
+    let todoDateCompleted = new Date(dateCompleted);
+    let currentDate = new Date(currentDayOfWeek);
+    return currentDate < todoDateCompleted;
+};
+
+
+const onOrAfterCreationDate = (dateAdded, currentDayOfWeek) => {
+    let todoDateAdded = new Date(dateAdded);
+    let currentDate = new Date(currentDayOfWeek);
+    return currentDate >= todoDateAdded;
+};
